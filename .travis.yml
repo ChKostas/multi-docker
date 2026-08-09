@@ -4,8 +4,8 @@ services:
 
 before_install:
   - docker build -t chrisosfp/react-test -f ./client/Dockerfile.dev ./client 
-  - echo "DOCKER_ID length: ${#DOCKER_ID}"
-  - echo "DOCKER_PASSWORD length: ${#DOCKER_PASSWORD}"
+  - echo "DOCKER_ID length -" ${#DOCKER_ID}
+  - echo "DOCKER_PASSWORD length -" ${#DOCKER_PASSWORD}
 
 script:
   - docker run -e CI=true chrisosfp/react-test npm test -- --coverage
