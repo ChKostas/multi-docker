@@ -4,9 +4,7 @@ services:
 
 before_install:
   - docker build -t chrisosfp/react-test -f ./client/Dockerfile.dev ./client 
-  - echo "DOCKER_ID length -" ${#DOCKER_ID}
-  - echo "DOCKER_PASSWORD length -" ${#DOCKER_PASSWORD}
-  - docker --version
+
 
 script:
   - docker run -e CI=true chrisosfp/react-test npm test -- --coverage
@@ -17,7 +15,7 @@ after_success:
   - docker build -t chrisosfp/multi-server ./server
   - docker build -t chrisosfp/multi-worker ./worker
   # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push chrisosfp/multi-client
   - docker push chrisosfp/multi-nginx
