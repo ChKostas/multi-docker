@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t chriskostas/react-test -f ./client/Dockerfile.dev ./client 
+  - docker build -t chrisosfp/react-test -f ./client/Dockerfile.dev ./client 
 
 script:
-  - docker run -e CI=true chriskostas/react-test npm test -- --coverage
+  - docker run -e CI=true chrisosfp/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t chriskostas/multi-client ./client 
-  - docker build -t chriskostas/multi-nginx  ./nginx
-  - docker build -t chriskostas/multi-server ./server
-  - docker build -t chriskostas/multi-worker ./worker
+  - docker build -t chrisosfp/multi-client ./client 
+  - docker build -t chrisosfp/multi-nginx  ./nginx
+  - docker build -t chrisosfp/multi-server ./server
+  - docker build -t chrisosfp/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push chriskostas/multi-client
-  - docker push chriskostas/multi-nginx
-  - docker push chriskostas/multi-server
-  - docker push chriskostas/multi-worker
+  - docker push chrisosfp/multi-client
+  - docker push chrisosfp/multi-nginx
+  - docker push chrisosfp/multi-server
+  - docker push chrisosfp/multi-worker
