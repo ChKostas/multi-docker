@@ -21,3 +21,14 @@ after_success:
   - docker push chrisosfp/multi-nginx
   - docker push chrisosfp/multi-server
   - docker push chrisosfp/multi-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "multi-docker"
+  env: "Multi-docker-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-951913066313"
+  bucket_path: "docker-multi"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
