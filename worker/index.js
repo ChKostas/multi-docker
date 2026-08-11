@@ -2,9 +2,7 @@ const keys = require('./keys');
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-    host: keys.redisHost,
-    port: keys.redisPort,
-    retry_strategy: () => 1000 
+    url: `redis://${keys.redisHost}:${keys.redisPort}`
 });
 
 const sub = redisClient.duplicate();
@@ -13,7 +11,7 @@ redisClient.connect();
 sub.connect();
  
 function fib(index) {
-  if (index < 2) return 1;
+  if (index < 2) return index;
   return fib(index - 1) + fib(index - 2);
 }
  
